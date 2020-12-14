@@ -1,0 +1,25 @@
+---
+  - name: "Instalar java e unzip"
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      name: ["openjdk-11-jre", "unzip"]
+      state: latest
+    become: yes
+  
+  - name: "Copiar aplicação"
+    copy:
+      src: "files/springapp.zip"
+      dest: "/home/azureuser/springapp.zip"
+    become: yes
+
+  - name: "Desempacotar aplicação"
+    unarchive:
+      src: /home/azureuser/springapp.zip
+      dest: /srv
+      remote_src: yes
+    become: yes
+
+  - name: "Executar aplicação"
+    shell: "nohup java -Dspring.profiles.active=mysql -jar /srv/*.jar &"
+    become: yes
