@@ -93,7 +93,7 @@ resource "null_resource" "deploy" {
             "sudo apt-get update",
             "sudo apt-get install -y software-properties-common",
             "sudo apt-add-repository --yes --update ppa:ansible/ansible",
-            "sudo apt-get -y install python3 ansible=2.9.16-1ppa~bionic",
+            "sudo apt-get -y install python3 ansible",
             "ansible-playbook -i /home/azureuser/ansible/hosts /home/azureuser/ansible/main.yml"
         ]
     }
