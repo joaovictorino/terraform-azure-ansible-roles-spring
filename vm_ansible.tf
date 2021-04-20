@@ -63,7 +63,7 @@ resource "time_sleep" "wait_30_seconds" {
   create_duration = "30s"
 }
 
-resource "null_resource" "upload" {
+resource "null_resource" "upload1" {
     provisioner "file" {
         connection {
             type = "ssh"
@@ -78,9 +78,9 @@ resource "null_resource" "upload" {
     depends_on = [ time_sleep.wait_30_seconds ]
 }
 
-resource "null_resource" "deploy" {
+resource "null_resource" "deploy1" {
     triggers = {
-        order = null_resource.upload.id
+        order = null_resource.upload1.id
     }
     provisioner "remote-exec" {
         connection {

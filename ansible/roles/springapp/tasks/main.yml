@@ -20,6 +20,22 @@
       remote_src: yes
     become: yes
 
-  - name: "Executar aplicação"
-    shell: "nohup java -Dspring.profiles.active=mysql -jar /srv/*.jar &"
+  - name: "Criar pasta logs springapp"
+    file:
+      path: /var/log/springapp
+      state: directory
+    become: yes
+
+  - name: "Copiar serviço spring"
+    copy:
+      src: "files/springapp.service"
+      dest: "/etc/systemd/system/springapp.service"
+    become: yes
+
+  - name: "Iniciar serviço"
+    shell: "systemctl start springapp.service"
+    become: yes
+
+  - name: "Habilitar serviço"
+    shell: "systemctl enable springapp.service"
     become: yes
