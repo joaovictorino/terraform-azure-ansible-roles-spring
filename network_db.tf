@@ -6,8 +6,7 @@ resource "azurerm_network_interface" "nic_aula_db" {
     ip_configuration {
         name                          = "myNicConfigurationDB"
         subnet_id                     = azurerm_subnet.subnet_aula.id
-        private_ip_address_allocation = "Static"
-        private_ip_address            = "10.80.4.10"
+        private_ip_address_allocation = "Dynamic"
     }
 
     tags = {

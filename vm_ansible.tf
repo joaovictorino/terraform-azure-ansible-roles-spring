@@ -63,6 +63,27 @@ resource "time_sleep" "wait_30_seconds" {
   create_duration = "30s"
 }
 
+resource "local_file" "inventory" {
+    filename = "./ansible/hosts"
+    content     = <<EOF
+[mysqlserver]
+${azurerm_network_interface.nic_aula_db.private_ip_address}
+
+[springapp]
+${azurerm_network_interface.nic_aula.private_ip_address}
+
+[app:children]
+mysqlserver
+springapp
+
+[app:vars]
+ansible_user=azureuser
+ansible_ssh_pass=godofw@r35
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+    EOF
+}
+
 resource "null_resource" "upload" {
     provisioner "file" {
         connection {
