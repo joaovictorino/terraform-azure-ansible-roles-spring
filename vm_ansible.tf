@@ -81,7 +81,8 @@ ansible_user=azureuser
 ansible_ssh_pass=godofw@r35
 ansible_python_interpreter=/usr/bin/python3
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
-    EOF
+EOF
+    depends_on = [ time_sleep.wait_30_seconds ]
 }
 
 resource "null_resource" "upload" {

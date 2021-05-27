@@ -6,8 +6,7 @@ resource "azurerm_network_interface" "nic_aula_ansible" {
     ip_configuration {
         name                          = "myNicConfigurationAnsible"
         subnet_id                     = azurerm_subnet.subnet_aula.id
-        private_ip_address_allocation = "Static"
-        private_ip_address            = "10.80.4.14"
+        private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = azurerm_public_ip.publicip_aula_ansible.id
     }
 
