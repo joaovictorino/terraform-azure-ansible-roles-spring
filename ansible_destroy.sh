@@ -1,3 +1,5 @@
+terraform init -upgrade
+
 terraform destroy --auto-approve    --target azurerm_linux_virtual_machine.vm_aula_ansible \
                                     --target azurerm_storage_account.storage_aula_ansible \
                                     --target azurerm_network_interface.nic_aula_ansible \
