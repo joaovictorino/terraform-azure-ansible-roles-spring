@@ -97,7 +97,7 @@ resource "null_resource" "upload" {
             type = "ssh"
             user = var.user
             password = var.password
-            host = data.azurerm_public_ip.ip_aula_ansible_data.ip_address
+            host = azurerm_public_ip.publicip_aula_ansible.ip_address
         }
         source = "ansible"
         destination = "/home/azureuser"
@@ -115,7 +115,7 @@ resource "null_resource" "deploy" {
             type = "ssh"
             user = var.user
             password = var.password
-            host = data.azurerm_public_ip.ip_aula_ansible_data.ip_address
+            host = azurerm_public_ip.publicip_aula_ansible.ip_address
         }
         inline = [
             "sudo apt-get update",
